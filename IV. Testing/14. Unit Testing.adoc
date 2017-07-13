@@ -13,10 +13,11 @@ clean layering and componentization of your codebase will facilitate easier unit
 testing. For example, you can test service layer objects by stubbing or mocking DAO or
 Repository interfaces, without needing to access persistent data while running unit
 tests.
+
 __依赖注入__应该使你的__代码__不依赖于容器。
 组成应用程序的__POJO对象__是可测试的，使用`new`运算符简单地实例化对象。
 你可以使用__模拟对象__(结合其他有价值的测试技术)隔离测试代码。
-如果你遵循Spring的架构建议，__代码库的清晰分层和组件化__将有助于简化单元测试。
+如果你遵循Spring的架构建议，__代码库的清晰分层和组件化/模块化__将有助于简化单元测试。
 例如，通过桩模块或模拟DAO或Repository接口测试服务层对象，而无需在运行单元测试时访问持久性数据。
 
 True unit tests typically run extremely quickly, as there is no runtime infrastructure
@@ -25,6 +26,7 @@ boost your productivity. You may not need this section of the testing chapter to
 you write effective unit tests for your IoC-based applications. For certain unit testing
 scenarios, however, the Spring Framework provides the following mock objects and testing
 support classes.
+
 强调真正的单元测试是开发方法的一部分，将会提升你的生产力。
 对于特定的单元测试场景，Spring框架提供下面的模拟对象和测试支持类。
 
@@ -61,6 +63,7 @@ convenient to use than dynamic mock objects such as http://www.easymock.org[Easy
 alternative Servlet API mock objects such as http://www.mockobjects.com[MockObjects]. Since
 Spring Framework 4.0, the set of mocks in the `org.springframework.mock.web` package is
 based on the Servlet 3.0 API.
+
 `org.springframework.mock.web`包包含一组全面的Servlet API模拟对象，
 这些对于测试Web上下文、控制器和过滤器很有用。
 
