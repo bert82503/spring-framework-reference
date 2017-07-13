@@ -1,0 +1,37 @@
+
+
+
+[[testing]]
+= Testing
+
+[partintro]
+--
+The adoption of the test-driven-development (TDD) approach to software
+development is certainly advocated by the Spring team, and so coverage of Spring's
+support for integration testing is covered (alongside best practices for unit testing).
+The Spring team has found that the correct use of IoC certainly does make both unit and
+integration testing easier (in that the presence of setter methods and appropriate
+constructors on classes makes them easier to wire together in a test without having to
+set up service locator registries and suchlike)... the chapter dedicated solely to
+testing will hopefully convince you of this as well.
+采用测试驱动开发(TDD)方式进行软件开发肯定是Spring团队提倡的，
+因此涵盖了Spring支持的集成测试(以及单元测试的最佳做法)。
+Spring团队发现，正确使用IoC/控制反转容器肯定会使单元和集成测试更容易
+(因为类的setter方法和合适的构造函数的存在，使得它们在测试中更容易地连接在一起，
+而无需设置服务定位器注册表等...)。
+本章专门用于测试，也希望能够说服你。
+--
+
+
+[[testing-introduction]]
+== Introduction to Spring Testing/Spring测试简介
+Testing is an integral part of enterprise software development. This chapter focuses on
+the value-add of the IoC principle to <<unit-testing,unit testing>> and on the benefits
+of the Spring Framework's support for <<integration-testing,integration testing>>. __(A
+thorough treatment of testing in the enterprise is beyond the scope of this reference
+manual.)__
+
+测试是企业软件开发的一个组成部分。
+本章节重点介绍IoC原理对单元测试的价值，以及对Spring框架支持的集成测试的益处。
+
+

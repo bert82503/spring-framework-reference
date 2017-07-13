@@ -1,33 +1,9 @@
-[[testing]]
-= Testing
-
-[partintro]
---
-The adoption of the test-driven-development (TDD) approach to software
-development is certainly advocated by the Spring team, and so coverage of Spring's
-support for integration testing is covered (alongside best practices for unit testing).
-The Spring team has found that the correct use of IoC certainly does make both unit and
-integration testing easier (in that the presence of setter methods and appropriate
-constructors on classes makes them easier to wire together in a test without having to
-set up service locator registries and suchlike)... the chapter dedicated solely to
-testing will hopefully convince you of this as well.
---
-
-
-[[testing-introduction]]
-== Introduction to Spring Testing
-Testing is an integral part of enterprise software development. This chapter focuses on
-the value-add of the IoC principle to <<unit-testing,unit testing>> and on the benefits
-of the Spring Framework's support for <<integration-testing,integration testing>>. __(A
-thorough treatment of testing in the enterprise is beyond the scope of this reference
-manual.)__
-
 
 
 
 [[unit-testing]]
-== Unit Testing
-Dependency Injection should make your code less dependent on the container than it would
+== Unit Testing/单元测试
+_Dependency Injection_ should make your _code_ less dependent on the container than it would
 be with traditional Java EE development. The POJOs that make up your application should
 be testable in JUnit or TestNG tests, with objects simply instantiated using the `new`
 operator, __without Spring or any other container__. You can use <<mock-objects,mock
@@ -37,6 +13,11 @@ clean layering and componentization of your codebase will facilitate easier unit
 testing. For example, you can test service layer objects by stubbing or mocking DAO or
 Repository interfaces, without needing to access persistent data while running unit
 tests.
+__依赖注入__应该使你的__代码__不依赖于容器。
+组成应用程序的__POJO对象__是可测试的，使用`new`运算符简单地实例化对象。
+你可以使用__模拟对象__(结合其他有价值的测试技术)隔离测试代码。
+如果你遵循Spring的架构建议，__代码库的清晰分层和组件化__将有助于简化单元测试。
+例如，通过桩模块或模拟DAO或Repository接口测试服务层对象，而无需在运行单元测试时访问持久性数据。
 
 True unit tests typically run extremely quickly, as there is no runtime infrastructure
 to set up. Emphasizing true unit tests as part of your development methodology will
@@ -44,15 +25,17 @@ boost your productivity. You may not need this section of the testing chapter to
 you write effective unit tests for your IoC-based applications. For certain unit testing
 scenarios, however, the Spring Framework provides the following mock objects and testing
 support classes.
+强调真正的单元测试是开发方法的一部分，将会提升你的生产力。
+对于特定的单元测试场景，Spring框架提供下面的模拟对象和测试支持类。
 
 
 
 [[mock-objects]]
-=== Mock Objects
+=== Mock Objects/模拟对象
 
 
 [[mock-objects-env]]
-==== Environment
+==== Environment/环境属性
 The `org.springframework.mock.env` package contains mock implementations of the
 `Environment` and `PropertySource` abstractions (see <<beans-definition-profiles>>
 and <<beans-property-source-abstraction>>). `MockEnvironment` and
@@ -78,10 +61,13 @@ convenient to use than dynamic mock objects such as http://www.easymock.org[Easy
 alternative Servlet API mock objects such as http://www.mockobjects.com[MockObjects]. Since
 Spring Framework 4.0, the set of mocks in the `org.springframework.mock.web` package is
 based on the Servlet 3.0 API.
+`org.springframework.mock.web`包包含一组全面的Servlet API模拟对象，
+这些对于测试Web上下文、控制器和过滤器很有用。
 
 For thorough integration testing of your Spring MVC and REST ``Controller``s in
 conjunction with your `WebApplicationContext` configuration for Spring MVC, see the
 <<spring-mvc-test-framework,_Spring MVC Test Framework_>>.
+<<spring-mvc-test-framework,_Spring MVC测试框架_>>
 
 
 [[mock-objects-portlet]]
@@ -92,11 +78,11 @@ objects, targeted at usage with Spring's Portlet MVC framework.
 
 
 [[unit-testing-support-classes]]
-=== Unit Testing support Classes
+=== Unit Testing support Classes/单元测试支持类
 
 
 [[unit-testing-utilities]]
-==== General testing utilities
+==== General testing utilities/一般测试实用程序库
 The `org.springframework.test.util` package contains several general purpose utilities
 for use in unit and integration testing.
 
@@ -106,13 +92,19 @@ a non-`public` field, invoke a non-`public` setter method, or invoke a non-`publ
 _configuration_ or _lifecycle_ callback method when testing application code involving
 use cases such as the following.
 
+`ReflectionTestUtils`是基于反射的工具方法集。开发者们在这些测试场景可以使用这些方法，
+需要改变常量的值、设置非公开域的字段、调用非公开域的设置方法、调用非公开域的配置或生命周期回调方法。
+
 * ORM frameworks such as JPA and Hibernate that condone `private` or `protected` field
   access as opposed to `public` setter methods for properties in a domain entity.
+  对象关系映射框架(ORM)
 * Spring's support for annotations such as `@Autowired`, `@Inject`, and `@Resource`,
   which provides dependency injection for `private` or `protected` fields, setter
   methods, and configuration methods.
+  Spring支持的注解，它们提供私有或保护域字段、设置方法和配置方法的依赖注入。
 * Use of annotations such as `@PostConstruct` and `@PreDestroy` for lifecycle callback
   methods.
+  生命周期回调方法的注解的使用
 
 `AopTestUtils` is a collection of AOP-related utility methods. These methods can be used
 to obtain a reference to the underlying target object hidden behind one or more Spring
@@ -120,6 +112,10 @@ proxies. For example, if you have configured a bean as a dynamic mock using a li
 like EasyMock or Mockito and the mock is wrapped in a Spring proxy, you may need direct
 access to the underlying mock in order to configure expectations on it and perform
 verifications. For Spring's core AOP utilities, see `AopUtils` and `AopProxyUtils`.
+
+`AopTestUtils`是AOP相关的工具方法集。这些方法可以用于获取底层目标对象的引用，
+它们隐藏在一个或多个Spring代理之后。
+对于Spring的核心AOP实用程序库，请查看`AopUtils`和`AopProxyUtils`。
 
 
 
